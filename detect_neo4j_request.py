@@ -3,7 +3,7 @@ import dpkt, pcap
 import re, time
 import sys
 import socket
-import wiringpi2 as wiringpi  
+import wiringpi2 as wiringpi
 import threading
 
 RED = 22
@@ -32,9 +32,9 @@ def __my_handler(ts,pkt):
 
     if (syn_flag == True):
         #print socket.inet_ntoa(ip.src)
-        if socket.inet_ntoa(ip.src) != "192.168.178.103":
-            wiringpi.digitalWrite(RED, 1)
-            threading.Thread(target=off).start()
+        #if socket.inet_ntoa(ip.src) != "192.168.178.103":
+        wiringpi.digitalWrite(RED, 1)
+        threading.Thread(target=off).start()
 
 pc = pcap.pcap(name='eth0')
 pc.setfilter('tcp and dst port 7474')
