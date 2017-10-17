@@ -4,7 +4,9 @@ Exposes the status of a neo4j cluster member to a raspberry pi led
 
 ## requirements
 
-python modules: wiringpi2, requests (install those with pip)
+python modules: wiringpi, requests (install those with pip)
+
+NB: you need a recent version of wiringpi: `sudo pip install -U wiringpi`
 
 ## usage
 
@@ -15,6 +17,9 @@ Either run the script directly as root
     sudo neo4j_raspberry_hastatus_led.py
 
 or integrate into http://supervisord.org[Supervisord].
+
+
+There's a script to test the LED: `./test_leds.py`.
 
 ## description
 

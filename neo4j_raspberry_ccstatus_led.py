@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import wiringpi2 as wiringpi  
+import wiringpi
 from time import sleep  
 import requests
 

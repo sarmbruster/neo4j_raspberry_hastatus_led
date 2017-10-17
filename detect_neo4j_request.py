@@ -3,7 +3,7 @@ import dpkt, pcap
 import re, time
 import sys
 import socket
-import wiringpi2 as wiringpi
+import wiringpi
 import threading
 
 RED = 22
