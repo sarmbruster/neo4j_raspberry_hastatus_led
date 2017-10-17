@@ -1,6 +1,6 @@
-# neo4j_raspberry_hastatus_led
+# neo4j_raspberry_led
 
-Exposes the status of a neo4j cluster member to a raspberry pi led
+This project contains couple of python scripts for my Raspberry Pi based Neo4j demo cluster.
 
 ## requirements
 
@@ -8,7 +8,44 @@ python modules: wiringpi, requests (install those with pip)
 
 NB: you need a recent version of wiringpi: `sudo pip install -U wiringpi`
 
+## scripts
+
+### neo4j_raspberry_ccstatus_led.py
+
+Exposes Neo4j Causal Cluster status to LEDs connected to GPIO:
+
+* if status is "leader": GPIO PIN 17 is switched on (a green light)
+* if status is "follower": GPIO PIN 27 is switched on (a yellow light)
+* if status is "read replica": GPIO PIN 22 is switched on (a red light)
+* if status returns a connection exception: GPIO PIN 22 is switched on (a red light)
+* if a timeout happens all three ports are switch on
+
+### querylog_led.py
+
+Expects that Neo4j's `query.log` is piped into this script. For each query the three LEDs are inverted for 0.2 secs.
+
+### test_leds.py
+
+A test script to switch on LEDs step by step to validate hardware/wiring is working correctly.
+
 ## usage
+
+It is recommended to run `neo4j_raspbery_ccstatus_led.py` and `querylog_led.py` via supervisord automatically using the following configuration files:
+
+./etc/supervisor/conf.d/neo4j_raspberry_ccstatus_led.conf
+[source,conf]
+----
+[program:neo4j_raspberry_cctatus_led]
+command=/home/pi/neo4j_raspberry_led/neo4j_raspberry_ccstatus_led.py
+----
+
+./etc/supervisor/conf.d/neo4j_querylog_led.conf
+[source,conf]
+----
+[program:neo4j_querylog_led]
+command=bash -c "tail -f /var/log/neo4j/query.log | python /home/pi/neo4j_raspberry_led/querylog_led.py"
+----
+
 
 Adopt the trivial password in l.19 to the one you're using for Neo4j authentication.
 
