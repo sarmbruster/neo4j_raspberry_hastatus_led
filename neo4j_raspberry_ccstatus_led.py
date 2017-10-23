@@ -40,23 +40,13 @@ while True:
 
         sleep(1)
 
-    except requests.exceptions.ConnectionError:
-        wiringpi.digitalWrite(GREEN, 0)
-        wiringpi.digitalWrite(YELLOW, 0)
-        wiringpi.digitalWrite(RED, 1)
-        sleep(0.5)
-        wiringpi.digitalWrite(GREEN, 1)
-        wiringpi.digitalWrite(YELLOW, 0)
-        wiringpi.digitalWrite(RED, 0)
-        sleep(0.5)
-
-    except requests.exceptions.ReadTimeout:
-        wiringpi.digitalWrite(GREEN, 1)
-        wiringpi.digitalWrite(YELLOW, 1)
-        wiringpi.digitalWrite(RED, 1)
-        sleep(0.5)
+    except:
+        #wiringpi.digitalWrite(GREEN, 1)
+        #wiringpi.digitalWrite(YELLOW, 1)
+        #wiringpi.digitalWrite(RED, 1)
+        #sleep(1)
         wiringpi.digitalWrite(GREEN, 0)
         wiringpi.digitalWrite(YELLOW, 0)
         wiringpi.digitalWrite(RED, 0)
-        sleep(0.5)
+        sleep(1)
 
